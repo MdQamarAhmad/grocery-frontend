@@ -8,7 +8,7 @@ function UserPage() {
     e.preventDefault();
     if (!item.trim()) return;
     
-  await fetch(import.meta.env.VITE_API_URL,{
+  await fetch(`${import.meta.env.VITE_API_URL}/submit`,{
   method: "POST",
   headers: {
     "Content-Type": "application/json", 
