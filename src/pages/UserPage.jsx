@@ -24,11 +24,26 @@ function UserPage() {
     setItem(""); // clear input
   };
 
- async function fetchItems(){
-   let res = await fetch(import.meta.env.VITE_API_URL);
-     let data = await res.json();
-     console.log(data);
+async function fetchItems() {
+  try {
+    let res = await fetch(`${import.meta.env.VITE_API_URL}/submit`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch items");
+    }
+
+    let data = await res.json();
+    console.log(data);  // shows items in console
+    return data;
+  } catch (err) {
+    console.error("Error fetching items:", err.message);
+    return [];
   }
+}
+
 
   return (
     <div style={{ padding: "20px", fontFamily: "Arial" }}>
